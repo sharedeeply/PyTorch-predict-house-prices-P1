@@ -13,5 +13,5 @@ def get_rmse_log(model, feature, label, use_gpu):
     label = Variable(label, volatile=True)
     pred = model(feature)
     clipped_pred = torch.clamp(pred, 1, float('inf'))
-    rmse = torch.sqrt(mse_loss(pred.log(), label.log()))
+    rmse = torch.sqrt(mse_loss(clipped_pred.log(), label.log()))
     return rmse.data[0]
